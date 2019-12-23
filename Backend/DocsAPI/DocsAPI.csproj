@@ -2,9 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>6b83470e-631f-46a7-81c4-9578b87410b8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

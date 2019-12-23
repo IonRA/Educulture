@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocsAPI", "DocsAPI\DocsAPI.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{621F8077-A7B2-4485-A513-2A8E3D292A3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docs.Domain", "Docs.Domain\Docs.Domain.csproj", "{257EA19C-6F14-44BB-ADEB-E4DAD4336423}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Docs.Domain", "Docs.Domain\Docs.Domain.csproj", "{257EA19C-6F14-44BB-ADEB-E4DAD4336423}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docs.Infrastructure", "Docs.Infrastructure\Docs.Infrastructure.csproj", "{341E31ED-D5CA-42AC-84B1-8A2AC24C332E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Docs.Infrastructure", "Docs.Infrastructure\Docs.Infrastructure.csproj", "{341E31ED-D5CA-42AC-84B1-8A2AC24C332E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docs.MetadataDbContext", "Docs.MetadataDbContext\Docs.MetadataDbContext.csproj", "{A8D06D4A-360D-40A7-A313-9417D4258E25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Docs.MetadataDbContext", "Docs.MetadataDbContext\Docs.MetadataDbContext.csproj", "{A8D06D4A-360D-40A7-A313-9417D4258E25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{98AAF954-9DDE-4D70-B84F-5D2706FD246D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{FBAC2499-FD94-4042-B8AD-F3C4663666C2} = {98AAF954-9DDE-4D70-B84F-5D2706FD246D}
 		{257EA19C-6F14-44BB-ADEB-E4DAD4336423} = {621F8077-A7B2-4485-A513-2A8E3D292A3B}
 		{341E31ED-D5CA-42AC-84B1-8A2AC24C332E} = {621F8077-A7B2-4485-A513-2A8E3D292A3B}
 		{A8D06D4A-360D-40A7-A313-9417D4258E25} = {621F8077-A7B2-4485-A513-2A8E3D292A3B}

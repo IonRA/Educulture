@@ -12,7 +12,7 @@ namespace Docs.Domain.Models
 		public string Details { get; set; }
 		public string Tags { get; set; }
 		public Author Author { get; set; }
-		public virtual IEnumerable<Enrolment> Enrolments { get; set; }
+		public virtual IEnumerable<Enrollment> Enrolments { get; set; }
 		
 	} 
 }

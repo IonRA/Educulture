@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Docs.Domain.Models
 {
-	public class Enrolment
+	public class Enrollment
 	{
 		public int Id { get; set; }
 		public int UserID { get; set; }

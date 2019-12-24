@@ -2,14 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Docs.MetadataDbContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Services.Docs.Domain.Settings;
 
 namespace DocsAPI
 {
@@ -25,7 +29,20 @@ namespace DocsAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+	        var settings = Configuration.Get<DocsApiSettings>();
+			services.TryAddSingleton(settings);
+
+			services.AddDbContext<AssessmentDbContext>(options =>
+			{
+					options.UseSqlServer(settings.MetadataDbContextSettings.ConnectionString);
+			});
+
+			services.AddDbContext<UserDbContext>(options =>
+			{
+				options.UseSqlServer(settings.MetadataDbContextSettings.ConnectionString);
+			});
+
+			services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

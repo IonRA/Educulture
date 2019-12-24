@@ -7,7 +7,7 @@ using Docs.Domain.Models;
 
 namespace Docs.Infrastructure
 {
-	public class UserService: IUserService
+	public class UserService: IUserManager
 	{
 		public Task<List<User>> GetAll()
 		{

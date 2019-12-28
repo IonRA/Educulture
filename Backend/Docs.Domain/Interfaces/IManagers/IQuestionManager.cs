@@ -9,14 +9,14 @@ namespace Docs.Domain.Interfaces.IManagers
 {
     public interface IQuestionManager
     {
-        public Task<Question> CreateAsync(Question Question);
+        Task<Question> CreateAsync(Question Question);
 
-        public Task<Question> AlterAsync(Question Question);
+        Task<Question> UpdateAsync(Question Question);
 
-        public Task<Question> GetAsync(Expression<Func<Question, bool>> expression);
+        Task<Question> GetAsync(Expression<Func<Question, bool>> expression);
 
-        public Task<List<Question>> GetAllAsync();
+        Task<List<Question>> GetAllAsync();
 
-        public Task DeleteAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

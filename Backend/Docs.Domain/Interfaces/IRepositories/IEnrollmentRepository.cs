@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Docs.Domain.Interfaces.IRepositories
 {
-    interface IEnrollmentRepository : IBaseRepository<Enrollment>
+	public interface IEnrollmentRepository : IBaseRepository<Enrollment>
     {
     }
 }

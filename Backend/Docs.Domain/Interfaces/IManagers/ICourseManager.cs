@@ -9,14 +9,14 @@ namespace Docs.Domain.Interfaces.IManagers
 {
     public interface ICourseManager
     {
-        public Task<Course> CreateAsync(Course Course);
+        Task<Course> CreateAsync(Course Course);
 
-        public Task<Course> AlterAsync(Course Course);
+        Task<Course> UpdateAsync(Course Course);
 
-        public Task<Course> GetAsync(Expression<Func<Course, bool>> expression);
+        Task<Course> GetAsync(Expression<Func<Course, bool>> expression);
 
-        public Task<List<Course>> GetAllAsync();
+        Task<List<Course>> GetAllAsync();
 
-        public Task DeleteAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

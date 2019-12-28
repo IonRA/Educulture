@@ -9,14 +9,14 @@ namespace Docs.Domain.Interfaces.IManagers
 {
     public interface IAuthorManager
     {
-        public Task<Author> CreateAsync(Author Author);
+        Task<Author> CreateAsync(Author Author);
 
-        public Task<Author> AlterAsync(Author Author);
+        Task<Author> UpdateAsync(Author Author);
 
-        public Task<Author> GetAsync(Expression<Func<Author, bool>> expression);
+        Task<Author> GetAsync(Expression<Func<Author, bool>> expression);
 
-        public Task<List<Author>> GetAllAsync();
+        Task<List<Author>> GetAllAsync();
 
-        public Task DeleteAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

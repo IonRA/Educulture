@@ -9,14 +9,14 @@ namespace Docs.Domain.Interfaces.IManagers
 {
     public interface IEnrollmentManagear
     {
-        public Task<Enrollment> CreateAsync(Enrollment Enrollment);
+        Task<Enrollment> CreateAsync(Enrollment Enrollment);
 
-        public Task<Enrollment> AlterAsync(Enrollment Enrollment);
+        Task<Enrollment> UpdateAsync(Enrollment Enrollment);
 
-        public Task<Enrollment> GetAsync(Expression<Func<Enrollment, bool>> expression);
+        Task<Enrollment> GetAsync(Expression<Func<Enrollment, bool>> expression);
 
-        public Task<List<Enrollment>> GetAllAsync();
+        Task<List<Enrollment>> GetAllAsync();
 
-        public Task DeleteAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

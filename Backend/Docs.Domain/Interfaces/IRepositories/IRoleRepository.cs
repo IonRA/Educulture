@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Docs.Domain.Interfaces.IRepositories
 {
-    interface IRoleRepository : IBaseRepository<Role>
+	public interface IRoleRepository : IBaseRepository<Role>
     {
     }
 }

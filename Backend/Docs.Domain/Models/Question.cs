@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Docs.Domain.Models
 {
-	public class Question
+	public class Question : BaseEntity
 	{
-		public int Id { get; set; }
 		public string Content { get; set; }
 		public int CourseId { get; set; }
 	}

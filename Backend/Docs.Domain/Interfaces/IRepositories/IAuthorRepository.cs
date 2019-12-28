@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Docs.Domain.Interfaces.IRepositories
 {
-    interface IAuthorRepository : IBaseRepository<Author>
+	public interface IAuthorRepository : IBaseRepository<Author>
     {
     }
 }

@@ -9,14 +9,14 @@ namespace Docs.Domain.Interfaces.IManagers
 {
 	public interface IUserManager
 	{
-        public Task<User> CreateAsync(User user);
+        Task<User> CreateAsync(User user);
 
-        public Task<User> AlterAsync(User User);
+		Task<User> UpdateAsync(User User);
 
-        public Task<User> GetAsync(Expression<Func<User, bool>> expression);
+        Task<User> GetAsync(Expression<Func<User, bool>> expression);
 
-        public Task<List<User>> GetAllAsync();
+        Task<List<User>> GetAllAsync();
 
-        public Task DeleteAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

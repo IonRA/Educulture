@@ -5,40 +5,51 @@ using System.Text;
 using System.Threading.Tasks;
 using Docs.Domain.Interfaces;
 using Docs.Domain.Interfaces.IManagers;
+using Docs.Domain.Interfaces.IRepositories;
 using Docs.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Docs.Infrastructure
 {
 	public class UserManager: IUserManager
 	{
-		public Task<List<User>> GetAll()
+		private IUserRepository _repo;
+
+		public UserManager(IUserRepository repo)
+		{
+			_repo = repo;
+		}
+
+		public async Task<User> UpdateAsync(User user)
+        {
+	        var result = await _repo.UpdateAsync(user);
+
+	        return result;
+        }
+
+		public Task<User> GetAsync(Expression<Func<User, bool>> expression)
 		{
 			throw new NotImplementedException();
 		}
 
-        Task<User> IUserManager.AlterAsync(User User)
+		public async Task<User> CreateAsync(User user)
         {
-            throw new NotImplementedException();
+	        var result = await _repo.CreateAsync(user);
+
+	        return result;
         }
 
-        Task<User> IUserManager.CreateAsync(User user)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+			await _repo.DeleteAsync(id);
         }
 
-        Task IUserManager.DeleteAsync(int id)
+        public async Task<List<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+	        var users = await _repo.GetAllAsync();
+
+	        return users;
         }
 
-        Task<List<User>> IUserManager.GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<User> IUserManager.GetAsync(Expression<Func<User, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

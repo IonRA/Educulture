@@ -9,14 +9,14 @@ namespace Docs.Domain.Interfaces.IManagers
 {
     public interface IRoleManager
     {
-        public Task<Role> CreateAsync(Role Role);
+        Task<Role> CreateAsync(Role Role);
 
-        public Task<Role> AlterAsync(Role Role);
+	    Task<Role> UpdateAsync(Role Role);
 
-        public Task<Role> GetAsync(Expression<Func<Role, bool>> expression);
+        Task<Role> GetAsync(Expression<Func<Role, bool>> expression);
 
-        public Task<List<Role>> GetAllAsync();
+        Task<List<Role>> GetAllAsync();
 
-        public Task DeleteAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

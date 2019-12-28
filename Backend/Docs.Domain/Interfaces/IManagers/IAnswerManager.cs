@@ -9,14 +9,14 @@ namespace Docs.Domain.Interfaces.IManagers
 {
     public interface IAnswerManager
     {
-        public Task<Answer> CreateAsync(Answer Answer);
+	    Task<Answer> CreateAsync(Answer Answer);
 
-        public Task<Answer> AlterAsync(Answer Answer);
+        Task<Answer> UpdateAsync(Answer Answer);
 
-        public Task<Answer> GetAsync(Expression<Func<Answer, bool>> expression);
+        Task<Answer> GetAsync(Expression<Func<Answer, bool>> expression);
 
-        public Task<List<Answer>> GetAllAsync();
+        Task<List<Answer>> GetAllAsync();
 
-        public Task DeleteAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

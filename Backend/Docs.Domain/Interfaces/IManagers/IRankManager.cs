@@ -9,14 +9,14 @@ namespace Docs.Domain.Interfaces.IManagers
 {
     public interface IRankManager
     {
-                public Task<Rank> CreateAsync(Rank Rank);
+      Task<Rank> CreateAsync(Rank Rank);
 
-        public Task<Rank> AlterAsync(Rank Rank);
+        Task<Rank> UpdateAsync(Rank Rank);
 
-        public Task<Rank> GetAsync(Expression<Func<Rank, bool>> expression);
+        Task<Rank> GetAsync(Expression<Func<Rank, bool>> expression);
 
-        public Task<List<Rank>> GetAllAsync();
+        Task<List<Rank>> GetAllAsync();
 
-        public Task DeleteAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

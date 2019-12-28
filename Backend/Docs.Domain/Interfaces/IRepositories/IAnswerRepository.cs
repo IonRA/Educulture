@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Docs.Domain.Interfaces.IRepositories
 {
-    interface IAnswerRepository: IBaseRepository<Answer>
+    public interface IAnswerRepository: IBaseRepository<Answer>
     {
     }
 }

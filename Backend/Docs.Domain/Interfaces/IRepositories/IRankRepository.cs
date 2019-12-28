@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Docs.Domain.Interfaces.IRepositories
 {
-    interface IRankRepository : IBaseRepository<Rank>
+	public interface IRankRepository : IBaseRepository<Rank>
     {
     }
 }

@@ -7,16 +7,7 @@ using System.Threading.Tasks;
 
 namespace Docs.Domain.Interfaces.IManagers
 {
-    public interface IQuestionManager
+    public interface IQuestionManager : IBaseManager<Question>
     {
-        Task<Question> CreateAsync(Question Question);
-
-        Task<Question> UpdateAsync(Question Question);
-
-        Task<Question> GetAsync(Expression<Func<Question, bool>> expression);
-
-        Task<List<Question>> GetAllAsync();
-
-        Task DeleteAsync(int id);
     }
 }

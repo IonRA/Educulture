@@ -7,16 +7,7 @@ using Docs.Domain.Models;
 
 namespace Docs.Domain.Interfaces.IManagers
 {
-	public interface IUserManager
-	{
-        Task<User> CreateAsync(User user);
-
-		Task<User> UpdateAsync(User User);
-
-        Task<User> GetAsync(Expression<Func<User, bool>> expression);
-
-        Task<List<User>> GetAllAsync();
-
-        Task DeleteAsync(int id);
+	public interface IUserManager : IBaseManager<User>
+    {
     }
 }

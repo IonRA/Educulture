@@ -7,16 +7,7 @@ using System.Threading.Tasks;
 
 namespace Docs.Domain.Interfaces.IManagers
 {
-    public interface ICourseManager
+    public interface ICourseManager: IBaseManager<Course>
     {
-        Task<Course> CreateAsync(Course Course);
-
-        Task<Course> UpdateAsync(Course Course);
-
-        Task<Course> GetAsync(Expression<Func<Course, bool>> expression);
-
-        Task<List<Course>> GetAllAsync();
-
-        Task DeleteAsync(int id);
     }
 }

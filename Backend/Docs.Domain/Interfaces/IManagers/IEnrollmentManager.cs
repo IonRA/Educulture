@@ -7,16 +7,7 @@ using System.Threading.Tasks;
 
 namespace Docs.Domain.Interfaces.IManagers
 {
-    public interface IEnrollmentManagear
+    public interface IEnrollmentManager : IBaseManager<Enrollment>
     {
-        Task<Enrollment> CreateAsync(Enrollment Enrollment);
-
-        Task<Enrollment> UpdateAsync(Enrollment Enrollment);
-
-        Task<Enrollment> GetAsync(Expression<Func<Enrollment, bool>> expression);
-
-        Task<List<Enrollment>> GetAllAsync();
-
-        Task DeleteAsync(int id);
     }
 }

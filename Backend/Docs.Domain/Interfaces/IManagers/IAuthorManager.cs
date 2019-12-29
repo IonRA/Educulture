@@ -7,16 +7,7 @@ using System.Threading.Tasks;
 
 namespace Docs.Domain.Interfaces.IManagers
 {
-    public interface IAuthorManager
+    public interface IAuthorManager: IBaseManager<Author>
     {
-        Task<Author> CreateAsync(Author Author);
-
-        Task<Author> UpdateAsync(Author Author);
-
-        Task<Author> GetAsync(Expression<Func<Author, bool>> expression);
-
-        Task<List<Author>> GetAllAsync();
-
-        Task DeleteAsync(int id);
     }
 }

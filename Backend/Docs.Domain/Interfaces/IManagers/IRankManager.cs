@@ -7,16 +7,7 @@ using System.Threading.Tasks;
 
 namespace Docs.Domain.Interfaces.IManagers
 {
-    public interface IRankManager
+    public interface IRankManager : IBaseManager<Rank>
     {
-      Task<Rank> CreateAsync(Rank Rank);
-
-        Task<Rank> UpdateAsync(Rank Rank);
-
-        Task<Rank> GetAsync(Expression<Func<Rank, bool>> expression);
-
-        Task<List<Rank>> GetAllAsync();
-
-        Task DeleteAsync(int id);
     }
 }

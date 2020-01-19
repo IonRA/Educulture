@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Docs.Infrastructure.Managers
 {
-    class EnrollmentManager : BaseManager<Enrollment, IEnrollmentRepository>, IEnrollmentManager
+    public class EnrollmentManager : BaseManager<Enrollment, IEnrollmentRepository>, IEnrollmentManager
     {
 
         public EnrollmentManager(IEnrollmentRepository repo) : base(repo)

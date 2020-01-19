@@ -11,8 +11,7 @@ namespace Docs.Infrastructure.Managers
 {
     public class AnswerManager : BaseManager<Answer, IAnswerRepository>, IAnswerManager
     {
-
-        public AnswerManager(IAnswerRepository repo): base(repo)
+	    public AnswerManager(IAnswerRepository repo): base(repo)
         {
         }
 

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Docs.Infrastructure.Managers
 {
-    class QuestionManager : BaseManager<Question, IQuestionRepository>, IQuestionManager
+    public class QuestionManager : BaseManager<Question, IQuestionRepository>, IQuestionManager
     {
 
         public QuestionManager(IQuestionRepository repo) : base(repo)

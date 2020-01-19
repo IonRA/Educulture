@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Docs.Infrastructure.Managers
 {
-    class RoleManager : BaseManager<Role, IRoleRepository>, IRoleManager
+    public class RoleManager : BaseManager<Role, IRoleRepository>, IRoleManager
     {
 
         public RoleManager(IRoleRepository repo) : base(repo)

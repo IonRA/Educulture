@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Docs.Infrastructure.Managers
 {
-    class CourseManager : BaseManager<Course, ICourseRepository>, ICourseManager
+    public class CourseManager : BaseManager<Course, ICourseRepository>, ICourseManager
     {
 
         public CourseManager(ICourseRepository repo) : base(repo)

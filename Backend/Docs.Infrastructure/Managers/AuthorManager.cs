@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Docs.Infrastructure.Managers
 {
-    class AuthorManager : BaseManager<Author, IAuthorRepository>, IAuthorManager
+    public class AuthorManager : BaseManager<Author, IAuthorRepository>, IAuthorManager
     {
 
         public AuthorManager(IAuthorRepository repo) : base(repo)

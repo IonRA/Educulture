@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Docs.Infrastructure.Managers
 {
-    class RankManager : BaseManager<Rank, IRankRepository>, IRankManager
+    public class RankManager : BaseManager<Rank, IRankRepository>, IRankManager
     {
 
         public RankManager(IRankRepository repo) : base(repo)

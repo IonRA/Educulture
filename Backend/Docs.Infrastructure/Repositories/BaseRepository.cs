@@ -6,15 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Docs.Domain.Interfaces.IRepositories;
 using Docs.Domain.Models;
+using Docs.MetadataDbContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace Docs.Infrastructure.Repositories
 {
 	public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
 	{
-		private readonly DbContext _db;
+		private readonly UserDbContext _db;
 
-		public BaseRepository(DbContext db)
+		public BaseRepository(UserDbContext db)
 		{
 			_db = db;
 		}

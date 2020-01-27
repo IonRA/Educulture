@@ -52,13 +52,13 @@ namespace DocsAPI
 			services.AddScoped<IRoleManager, RoleManager>();
 			services.AddScoped<IUserManager, UserManager>();
 
-			services.AddScoped<IAnswerRepository, AnswerRepository>();
+            services.AddScoped<IAnswerRepository, AnswerRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
-			services.AddScoped<ICourseRepository, CourseRepository>();
-			services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
-			services.AddScoped<IQuestionRepository, QuestionRepository>();
-			services.AddScoped<IRankRepository, RankRepository>();
-			services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IRankRepository, RankRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddSwaggerGen(c =>
@@ -77,8 +77,11 @@ namespace DocsAPI
                 app.UseDeveloperExceptionPage();
             }
 
-	        app.UseSwagger();
-            app.UseSwaggerUI(c =>
+	        app.UseSwagger(c =>
+	        {
+		        c.RouteTemplate = "api/swagger/{documentName}/swagger.json";
+            });
+	        app.UseSwaggerUI(c =>
             {
 	            c.RoutePrefix = "api/swagger";
 	            c.SwaggerEndpoint("v1/swagger.json", "DocsAPI V1");

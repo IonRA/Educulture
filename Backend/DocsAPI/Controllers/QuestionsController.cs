@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Docs.Domain.Interfaces.IManagers;
+using Docs.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,24 @@ namespace DocsAPI.Controllers
 	    public async Task GetAllQuestions()
 	    {
 		    await _questionManager.GetAllAsync();
+	    }
+
+	    [HttpPost("CreateQuestion")]
+	    public async Task CreateQuestion(Question question)
+	    {
+		    await _questionManager.CreateAsync(question);
+	    }
+
+	    [HttpPut("UpdateQuestion")]
+	    public async Task UpdateQuestion(Question question)
+	    {
+		    await _questionManager.UpdateAsync(question);
+	    }
+
+	    [HttpDelete("DeleteQuestion")]
+	    public async Task DeleteQuestion(int id)
+	    {
+		    await _questionManager.DeleteAsync(id);
 	    }
 
 	}

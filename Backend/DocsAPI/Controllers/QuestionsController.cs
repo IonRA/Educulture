@@ -21,28 +21,79 @@ namespace DocsAPI.Controllers
 	    }
 
 	    [HttpGet("GetAllQuestions")]
-	    public async Task GetAllQuestions()
+	    public async Task<IActionResult> GetAllQuestions()
 	    {
-		    await _questionManager.GetAllAsync();
-	    }
+            try
+            {
+                var questions = await _questionManager.GetAllAsync();
+
+                if (questions == null)
+                    return NotFound();
+
+                return Ok(questions);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpPost("CreateQuestion")]
-	    public async Task CreateQuestion(Question question)
+	    public async Task<IActionResult> CreateQuestion(Question question)
 	    {
-		    await _questionManager.CreateAsync(question);
-	    }
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                await _questionManager.CreateAsync(question);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpPut("UpdateQuestion")]
-	    public async Task UpdateQuestion(Question question)
+	    public async Task<IActionResult> UpdateQuestion(Question question)
 	    {
-		    await _questionManager.UpdateAsync(question);
-	    }
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                var quest = await _questionManager.UpdateAsync(question);
+
+                if (quest == null)
+                    return NotFound();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpDelete("DeleteQuestion")]
-	    public async Task DeleteQuestion(int id)
+	    public async Task<IActionResult> DeleteQuestion(int id)
 	    {
-		    await _questionManager.DeleteAsync(id);
-	    }
+            if (id <= 0)
+                return BadRequest("Not a valid id!");
+
+		    try
+            {
+                await _questionManager.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	}
 }

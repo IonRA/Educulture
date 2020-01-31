@@ -21,27 +21,78 @@ namespace DocsAPI.Controllers
 	    }
 
 	    [HttpGet("GetAllRoles")]
-	    public async Task GetAllRoles()
+	    public async Task<IActionResult> GetAllRoles()
 	    {
-		    await _roleManager.GetAllAsync();
-	    }
+            try
+            {
+                var roles = await _roleManager.GetAllAsync();
+
+                if (roles == null)
+                    return NotFound();
+
+                return Ok(roles);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpPost("CreateRole")]
-	    public async Task CreateRole(Role role)
+	    public async Task<IActionResult> CreateRole(Role role)
 	    {
-		    await _roleManager.CreateAsync(role);
-	    }
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                await _roleManager.CreateAsync(role);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpPut("UpdateRole")]
-	    public async Task UpdateRole(Role role)
+	    public async Task<IActionResult> UpdateRole(Role role)
 	    {
-		    await _roleManager.UpdateAsync(role);
-	    }
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                var updatedRole = await _roleManager.UpdateAsync(role);
+
+                if (updatedRole == null)
+                    return NotFound();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpDelete("DeleteRole")]
-	    public async Task DeleteRole(int id)
+	    public async Task<IActionResult> DeleteRole(int id)
 	    {
-		    await _roleManager.DeleteAsync(id);
-	    }
+            if (id <= 0)
+                return BadRequest("Not a valid id!");
+
+            try
+            {
+                await _roleManager.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 	}
 }

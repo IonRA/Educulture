@@ -21,27 +21,78 @@ namespace DocsAPI.Controllers
 	    }
 
 	    [HttpGet("GetAllEnrollments")]
-	    public async Task GetAllEnrollments()
+	    public async Task<IActionResult> GetAllEnrollments()
 	    {
-		    await _enrollmentManager.GetAllAsync();
+            try
+            {
+                var enrollments = await _enrollmentManager.GetAllAsync();
+
+                if (enrollments == null)
+                    return NotFound();
+
+                return Ok(enrollments);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 	    [HttpPost("CreateEnrollment")]
-	    public async Task CreateEnrollment(Enrollment enrollment)
+	    public async Task<IActionResult> CreateEnrollment(Enrollment enrollment)
 	    {
-		    await _enrollmentManager.CreateAsync(enrollment);
-	    }
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                await _enrollmentManager.CreateAsync(enrollment);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpPut("UpdateEnrollment")]
-	    public async Task UpdateEnrollment(Enrollment enrollment)
+	    public async Task<IActionResult> UpdateEnrollment(Enrollment enrollment)
 	    {
-		    await _enrollmentManager.UpdateAsync(enrollment);
-	    }
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                var enroll = await _enrollmentManager.UpdateAsync(enrollment);
+
+                if (enroll == null)
+                    return NotFound();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpDelete("DeleteEnrollment")]
-	    public async Task DeleteEnrollment(int id)
+	    public async Task<IActionResult> DeleteEnrollment(int id)
 	    {
-		    await _enrollmentManager.DeleteAsync(id);
-	    }
+            if (id <= 0)
+                return BadRequest("Not a valid id!");
+
+            try
+            {
+                await _enrollmentManager.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 	}
 }

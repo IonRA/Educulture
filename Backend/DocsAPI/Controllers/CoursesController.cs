@@ -21,27 +21,78 @@ namespace DocsAPI.Controllers
 	    }
 
 	    [HttpGet("GetAllCourses")]
-	    public async Task GetAllCourses()
+	    public async Task<IActionResult> GetAllCourses()
 	    {
-		    await _courseManager.GetAllAsync();
+            try
+            {
+                var courses = await _courseManager.GetAllAsync();
+
+                if (courses == null)
+                    return NotFound();
+
+                return Ok(courses);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 	    [HttpPost("CreateCourse")]
-	    public async Task CreateCourse(Course course)
+	    public async Task<IActionResult> CreateCourse(Course course)
 	    {
-		    await _courseManager.CreateAsync(course);
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                await _courseManager.CreateAsync(course);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 	    [HttpPut("UpdateCourse")]
-	    public async Task UpdateCourse(Course course)
+	    public async Task<IActionResult> UpdateCourse(Course course)
 	    {
-		    await _courseManager.UpdateAsync(course);
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                var updatedCourse = await _courseManager.UpdateAsync(course);
+
+                if (updatedCourse == null)
+                    return NotFound();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 	    [HttpDelete("DeleteCourse")]
-	    public async Task DeleteCourse(int id)
+	    public async Task<IActionResult> DeleteCourse(int id)
 	    {
-		    await _courseManager.DeleteAsync(id);
+            if (id <= 0)
+                return BadRequest("Not a valid id!");
+
+            try
+            {
+                await _courseManager.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 

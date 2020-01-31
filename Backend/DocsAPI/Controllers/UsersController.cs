@@ -21,27 +21,78 @@ namespace DocsAPI.Controllers
 	    }
 
 	    [HttpGet("GetAllUsers")]
-	    public async Task GetAllUsers()
+	    public async Task<IActionResult> GetAllUsers()
 	    {
-		    await _userManager.GetAllAsync();
-	    }
+            try
+            {
+                var users = await _userManager.GetAllAsync();
+
+                if (users == null)
+                    return NotFound();
+
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpPost("CreateUser")]
-	    public async Task CreateUser(User user)
+	    public async Task<IActionResult> CreateUser(User user)
 	    {
-		    await _userManager.CreateAsync(user);
-	    }
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                await _userManager.CreateAsync(user);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpPut("UpdateUser")]
-	    public async Task UpdateUser(User user)
+	    public async Task<IActionResult> UpdateUser(User user)
 	    {
-		    await _userManager.UpdateAsync(user);
-	    }
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                var updatedUser = await _userManager.UpdateAsync(user);
+
+                if (updatedUser == null)
+                    return NotFound();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpDelete("DeleteUser")]
-	    public async Task DeleteUser(int id)
+	    public async Task<IActionResult> DeleteUser(int id)
 	    {
-		    await _userManager.DeleteAsync(id);
-	    }
+            if (id <= 0)
+                return BadRequest("Not a valid id!");
+
+            try
+            {
+                await _userManager.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 	}
 }

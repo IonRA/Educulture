@@ -21,27 +21,77 @@ namespace DocsAPI.Controllers
 	    }
 
 		[HttpGet("GetAllRanks")]
-	    public async Task GetAllRanks()
+	    public async Task<IActionResult> GetAllRanks()
 	    {
-		    await _rankManager.GetAllAsync();
-	    }
+            try
+            {
+                var ranks = await _rankManager.GetAllAsync();
+
+                if (ranks == null)
+                    return NotFound();
+
+                return Ok(ranks);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpPost("CreateRank")]
-	    public async Task CreateRank(Rank rank)
+	    public async Task<IActionResult> CreateRank(Rank rank)
 	    {
-		    await _rankManager.CreateAsync(rank);
-	    }
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                await _rankManager.CreateAsync(rank);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpPut("UpdateRank")]
-	    public async Task UpdateRank(Rank rank)
+	    public async Task<IActionResult> UpdateRank(Rank rank)
 	    {
-		    await _rankManager.UpdateAsync(rank);
-	    }
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                var updatedRank = await _rankManager.UpdateAsync(rank);
+
+                if (updatedRank == null)
+                    return NotFound();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
 	    [HttpDelete("DeleteRank")]
-	    public async Task DeleteRank(int id)
+	    public async Task<IActionResult> DeleteRank(int id)
 	    {
-		    await _rankManager.DeleteAsync(id);
-	    }
+            if (id <= 0)
+                return BadRequest("Not a valid id!");
+
+            try
+            {
+                await _rankManager.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 	}
 }

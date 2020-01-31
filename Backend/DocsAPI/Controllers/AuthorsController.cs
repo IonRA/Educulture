@@ -22,27 +22,78 @@ namespace DocsAPI.Controllers
 	    }
 
 	    [HttpGet("GetAllAuthors")]
-	    public async Task GetAllAuthors()
+	    public async Task<IActionResult> GetAllAuthors()
 	    {
-		    await _authorManager.GetAllAsync();
+            try
+            {
+                var authors = await _authorManager.GetAllAsync();
+
+                if (authors == null)
+                    return NotFound();
+
+                return Ok(authors);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 	    [HttpPost("CreateAuthor")]
-	    public async Task CreateAuthor(Author author)
+	    public async Task<IActionResult> CreateAuthor(Author author)
 	    {
-		    await _authorManager.CreateAsync(author);
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                await _authorManager.CreateAsync(author);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 	    [HttpPut("UpdateAuthor")]
-	    public async Task UpdateAuthor(Author author)
+	    public async Task<IActionResult> UpdateAuthor(Author author)
 	    {
-		    await _authorManager.UpdateAsync(author);
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                var auth = await _authorManager.UpdateAsync(author);
+
+                if (auth == null)
+                    return NotFound();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 	    [HttpDelete("DeleteAuthor")]
-	    public async Task DeleteAuthor(int id)
+	    public async Task<IActionResult> DeleteAuthor(int id)
 	    {
-		    await _authorManager.DeleteAsync(id);
+            if (id <= 0)
+                return BadRequest("Not a valid id!");
+
+            try
+            {
+                await _authorManager.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 	}
 }

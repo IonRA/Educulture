@@ -6,6 +6,7 @@ using Docs.Domain.Interfaces.IManagers;
 using Docs.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace DocsAPI.Controllers
 {
@@ -21,27 +22,79 @@ namespace DocsAPI.Controllers
 	    }
 
 	    [HttpGet("GetAllAnswers")]
-	    public async Task GetAllAnswers()
+	    public async Task<IActionResult> GetAllAnswers()
 	    {
-		    await _answerManager.GetAllAsync();
+            try
+            {
+                var answers = await _answerManager.GetAllAsync();
+
+                if (answers == null)
+                    return NotFound();
+
+                return Ok(answers);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 	    [HttpPost("CreateAnswer")]
-	    public async Task CreateAnswer(Answer answer)
+	    public async Task<IActionResult> CreateAnswer(Answer answer)
 	    {
-		    await _answerManager.CreateAsync(answer);
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                await _answerManager.CreateAsync(answer);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 	    [HttpPut("UpdateAnswer")]
-	    public async Task UpdateAnswer(Answer answer)
+	    public async Task<IActionResult> UpdateAnswer(Answer answer)
 	    {
-		    await _answerManager.UpdateAsync(answer);
+            if (ModelState.IsValid == false)
+                return BadRequest("Invalid data");
+
+            try
+            {
+                var ans = await _answerManager.UpdateAsync(answer);
+
+                if (ans == null)
+                    return NotFound();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 	    }
 
 	    [HttpDelete("DeleteAnswer")]
-	    public async Task DeleteAnswer(int id)
+	    public async Task<IActionResult> DeleteAnswer(int id)
 	    {
-		    await _answerManager.DeleteAsync(id);
-	    }
+            if (id <= 0)
+                return BadRequest("Not a valid id!");
+
+            try
+            {
+                await _answerManager.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
 	}
 }

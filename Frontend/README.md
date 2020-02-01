@@ -1,4 +1,9 @@
-# ElCoffe
+# ElPatrimonium
+
+### Note for dev
+
+This project components are made with [Angular Material](https://material.angular.io/components/categories) for faster development... use it 
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.
 

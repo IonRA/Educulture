@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Sign Up</h2>
+<mat-dialog-content class="mat-typography">
+
+    <form fxLayout="column" action="">
+        <mat-form-field>
+            <input matInput placeholder="Enter your email" [formControl]="email" required type="text">
+            <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <input matInput placeholder="Enter your password" [formControl]="password" required type="password">
+            <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Re-Enter your password" [formControl]="passwordCheck" required type="password">
+            <mat-error *ngIf="passwordCheck.invalid">{{getPasswordCheckErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="equalPasswords()">check passwords</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Sign Up</button>
+</mat-dialog-actions>

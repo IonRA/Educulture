@@ -39,7 +39,30 @@ namespace DocsAPI.Controllers
             }
 	    }
 
-	    [HttpPost("CreateAnswer")]
+	    [HttpGet("GetAnswerById/{id}")]
+	    public async Task<IActionResult> GetAnswerById(int id)
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+
+		    try
+		    {
+			    var answer = await _answerManager.GetAsync(x => x.Id == id);
+
+			    if (answer == null)
+				    return NotFound();
+
+			    return Ok(answer);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+        [HttpPost("CreateAnswer")]
 	    public async Task<IActionResult> CreateAnswer(Answer answer)
 	    {
             if (ModelState.IsValid == false)

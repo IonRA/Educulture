@@ -9,6 +9,7 @@ using Docs.Infrastructure.Managers;
 using Docs.Infrastructure.Repositories;
 using Docs.MetadataDbContext;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -66,6 +67,13 @@ namespace DocsAPI
 	            c.SwaggerDoc("v1", new OpenApiInfo { Title = "DocsAPI", Version = "v1" });
             });
 
+            services.AddCors(options => options.AddPolicy("ManOfCultureCorsPolicy", new CorsPolicyBuilder()
+                .SetIsOriginAllowed(origin => origin.Contains("//localhost:"))
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .Build()));
+
             services.AddControllers();
         }
 
@@ -74,6 +82,7 @@ namespace DocsAPI
         {
 	        if (env.IsDevelopment())
             {
+                app.UseCors("ManOfCultureCorsPolicy");
                 app.UseDeveloperExceptionPage();
             }
 
@@ -86,6 +95,8 @@ namespace DocsAPI
 	            c.RoutePrefix = "api/swagger";
 	            c.SwaggerEndpoint("v1/swagger.json", "DocsAPI V1");
             });
+
+            
 
             app.UseHttpsRedirection();
 

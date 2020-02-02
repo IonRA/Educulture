@@ -38,7 +38,30 @@ namespace DocsAPI.Controllers
             }
         }
 
-	    [HttpPost("CreateRank")]
+	    [HttpGet("GetRankById/{id}")]
+	    public async Task<IActionResult> GetRankById(int id)
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+
+            try
+		    {
+			    var rank = await _rankManager.GetAsync(x => x.Id == id);
+
+			    if (rank == null)
+				    return NotFound();
+
+			    return Ok(rank);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+        [HttpPost("CreateRank")]
 	    public async Task<IActionResult> CreateRank(Rank rank)
 	    {
             if (ModelState.IsValid == false)

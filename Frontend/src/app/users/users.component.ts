@@ -1,14 +1,10 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { User } from '../_models/user.interface';
+import { UsersService } from '../_services/users.service';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
 
 /** Constants used to fill up our data base. */
 const COLORS: string[] = [
@@ -29,23 +25,39 @@ const NAMES: string[] = [
 export class UsersComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
+  displayedColumns: string[] = ['id', 'username', 'password', 'firstName', 'lastName', 'email', 'adress', 'phone', 'enrolments', 'points', 'roleId'];
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  dataSource: MatTableDataSource<User>;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
-  }
+  users: User[];
+
+  constructor(
+    private userService: UsersService,
+  ) {}
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.getAllUsers()
+  }
+
+  getAllUsers() {
+    console.log("getall")
+    this.userService.getAll().subscribe((users: User[]) => {
+      console.log("entered")
+      this.users = users;
+      
+      console.log(this.users)
+      console.log(users)
+      this.dataSource = new MatTableDataSource(users);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    },
+      error => {
+        console.log(error)
+        // this.notificationService.handleError(error);
+      });
   }
 
   applyFilter(filterValue: string) {
@@ -56,17 +68,4 @@ export class UsersComponent implements OnInit {
     }
   }
 
-}
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
 }

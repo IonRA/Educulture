@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material';
+import { MatInputModule, MatSortModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoursesComponent } from './courses/courses.component';
 import { HomeComponent } from './home/home.component';
@@ -25,6 +25,9 @@ import { ArticlesComponent } from './articles/articles.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
+import { UsersService } from './_services/users.service';
+import { AppConfig } from './app.config';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +42,7 @@ import { MatPaginatorModule } from '@angular/material';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
@@ -53,9 +57,13 @@ import { MatPaginatorModule } from '@angular/material';
     MatCardModule,
     MatGridListModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule
   ],
-  providers: [],
+  providers: [
+    AppConfig,
+    UsersService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     LogInDialog,

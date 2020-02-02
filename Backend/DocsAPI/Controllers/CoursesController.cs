@@ -38,7 +38,30 @@ namespace DocsAPI.Controllers
             }
 	    }
 
-	    [HttpPost("CreateCourse")]
+	    [HttpGet("GetCourseById/{id}")]
+	    public async Task<IActionResult> GetCourseById(int id)
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+
+            try
+		    {
+			    var course = await _courseManager.GetAsync(x => x.Id == id);
+
+			    if (course == null)
+				    return NotFound();
+
+			    return Ok(course);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+        [HttpPost("CreateCourse")]
 	    public async Task<IActionResult> CreateCourse(Course course)
 	    {
             if (ModelState.IsValid == false)

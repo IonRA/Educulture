@@ -38,7 +38,30 @@ namespace DocsAPI.Controllers
             }
 	    }
 
-	    [HttpPost("CreateEnrollment")]
+	    [HttpGet("GetEnrollmentById/{id}")]
+	    public async Task<IActionResult> GetEnrollmentById(int id)
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+
+            try
+		    {
+			    var enrollment = await _enrollmentManager.GetAsync(x => x.Id == id);
+
+			    if (enrollment == null)
+				    return NotFound();
+
+			    return Ok(enrollment);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+        [HttpPost("CreateEnrollment")]
 	    public async Task<IActionResult> CreateEnrollment(Enrollment enrollment)
 	    {
             if (ModelState.IsValid == false)

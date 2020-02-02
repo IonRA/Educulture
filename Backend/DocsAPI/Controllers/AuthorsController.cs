@@ -39,7 +39,30 @@ namespace DocsAPI.Controllers
             }
 	    }
 
-	    [HttpPost("CreateAuthor")]
+	    [HttpGet("GetAuthorById/{id}")]
+	    public async Task<IActionResult> GetAuthorById(int id)
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+
+		    try
+		    {
+			    var author = await _authorManager.GetAsync(x => x.Id == id);
+
+			    if (author == null)
+				    return NotFound();
+
+			    return Ok(author);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+        [HttpPost("CreateAuthor")]
 	    public async Task<IActionResult> CreateAuthor(Author author)
 	    {
             if (ModelState.IsValid == false)

@@ -6,6 +6,7 @@ using Docs.Domain.Interfaces.IManagers;
 using Docs.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace DocsAPI.Controllers
 {
@@ -38,7 +39,30 @@ namespace DocsAPI.Controllers
             }
         }
 
-	    [HttpPost("CreateUser")]
+	    [HttpGet("GetUserById/{id}")]
+	    public async Task<IActionResult> GetUserById(int id )
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+		    try
+		    {
+			    var user = await _userManager.GetAsync(x => x.Id == id);
+
+			    if (user == null)
+				    return NotFound();
+
+			    return Ok(user);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+
+        [HttpPost("CreateUser")]
 	    public async Task<IActionResult> CreateUser(User user)
 	    {
             if (ModelState.IsValid == false)

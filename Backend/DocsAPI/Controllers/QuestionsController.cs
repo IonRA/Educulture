@@ -38,7 +38,30 @@ namespace DocsAPI.Controllers
             }
         }
 
-	    [HttpPost("CreateQuestion")]
+	    [HttpGet("GetQuestionById/{id}")]
+	    public async Task<IActionResult> GetQuestionById(int id)
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+
+            try
+		    {
+			    var question = await _questionManager.GetAsync(x => x.Id == id);
+
+			    if (question == null)
+				    return NotFound();
+
+			    return Ok(question);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+        [HttpPost("CreateQuestion")]
 	    public async Task<IActionResult> CreateQuestion(Question question)
 	    {
             if (ModelState.IsValid == false)

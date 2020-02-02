@@ -38,7 +38,31 @@ namespace DocsAPI.Controllers
             }
         }
 
-	    [HttpPost("CreateRole")]
+	    [HttpGet("GetRoleById/{id}")]
+	    public async Task<IActionResult> GetRoleById(int id)
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+
+            try
+		    {
+			    var role = await _roleManager.GetAsync(x => x.Id == id);
+
+			    if (role == null)
+				    return NotFound();
+
+			    return Ok(role);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+
+        [HttpPost("CreateRole")]
 	    public async Task<IActionResult> CreateRole(Role role)
 	    {
             if (ModelState.IsValid == false)

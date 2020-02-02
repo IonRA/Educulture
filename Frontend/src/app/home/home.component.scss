@@ -1,26 +1,67 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 mat-grid-list {
-    height: 400px;
-    max-width: 1600px;
-    margin: 0 auto;
+  height: 400px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 !important;
+
+  .mat-grid-tile {
+    margin-top: 15% !important;
+    padding-top: 0 !important;
+    overflow: visible;
+
+   .mat-figure {
+      position: relative !important;
+      display: block !important;
+    }
+  }
 }
 
 mat-card {
-    margin: 20px;
-    max-height: 300px;
-    cursor: pointer;
+  width: 300px;
+  text-align: center;
+  cursor: pointer;
+  height: 500px;
+  transform: scale(1);
+  transition: all 0.2s ease-in-out;
+  background: #373737 !important;
+  background-blend-mode: multiply;
+  color: #c0b283 !important;
+  box-shadow: 15px 15px 20px #dcd0c0!important;
+  border-radius: 20px;
+  border: 1px solid #c0b283;
+  padding:25px;
 
-    transform: scale(1);
-    transition: all 0.2s ease-in-out;
-    
-    &:hover {
-        transform: scale(1.05);
-        transition: all 0.2s ease-in-out;
+  .mat-card-header {
+    border-left: 1px solid #dcd0c0;
+    border-right: 1px solid #dcd0c0;
+    flex-direction: row;
+    border-radius: 2px;
+    justify-content: center;
+
+    .mat-card-subtitle {
+      color: #dcd0c0;
+      margin: 0;
     }
+  }
+
+  .mat-card-content {
+    border-left: 1px solid #dcd0c0;
+    border-right: 1px solid #dcd0c0;
+    flex-direction: row;
+    border-radius: 2px;
+    color: #dcd0c0;
+    justify-content: center;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+  }
 }
 
 .icon-container {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin: 25px;
 }

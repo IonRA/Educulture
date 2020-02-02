@@ -1,8 +1,11 @@
 @import "../config.scss";
 
 .main-container {
-    background-color: $background-color;
-    color: $text-color;
-    margin-top: $nav-height;
-    min-height: calc(100vh - #{$nav-height})
+  background: #ebebeb;
+  color: $text-color;
+  min-height: calc(100vh - #{$nav-height})
+}
+
+.main-container {
+  height: 100%;
 }

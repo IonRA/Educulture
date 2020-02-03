@@ -82,8 +82,7 @@ namespace DocsAPI.Controllers
 
 
         [HttpPost("CreateUser")]
-	    
-	    public async Task<IActionResult> CreateUser([FromBody]User user)
+        public async Task<IActionResult> CreateUser([FromBody]User user)
 	    {
             if (ModelState.IsValid == false)
                 return BadRequest("Invalid data");
@@ -125,7 +124,7 @@ namespace DocsAPI.Controllers
             }
         }
 
-	    [HttpDelete("DeleteUser")]
+	    [HttpDelete("DeleteUser/{id}")]
 	    public async Task<IActionResult> DeleteUser(int id)
 	    {
             if (id <= 0)

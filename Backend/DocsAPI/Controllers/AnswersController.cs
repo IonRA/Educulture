@@ -101,7 +101,7 @@ namespace DocsAPI.Controllers
             }
 	    }
 
-	    [HttpDelete("DeleteAnswer")]
+	    [HttpDelete("DeleteAnswer/{id}")]
 	    public async Task<IActionResult> DeleteAnswer(int id)
 	    {
             if (id <= 0)

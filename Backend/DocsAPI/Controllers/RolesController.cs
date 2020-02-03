@@ -101,7 +101,7 @@ namespace DocsAPI.Controllers
             }
         }
 
-	    [HttpDelete("DeleteRole")]
+	    [HttpDelete("DeleteRole/{id}")]
 	    public async Task<IActionResult> DeleteRole(int id)
 	    {
             if (id <= 0)

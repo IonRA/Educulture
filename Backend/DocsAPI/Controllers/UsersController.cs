@@ -82,15 +82,18 @@ namespace DocsAPI.Controllers
 
 
         [HttpPost("CreateUser")]
-	    public async Task<IActionResult> CreateUser([FromBody] User user)
+	    
+	    public async Task<IActionResult> CreateUser([FromBody]User user)
 	    {
             if (ModelState.IsValid == false)
                 return BadRequest("Invalid data");
 
             try
             {
+                
                 var _user = await _userManager.CreateAsync(user);
 
+                
                 return Ok(_user);
             }
             catch (Exception ex)
@@ -100,7 +103,8 @@ namespace DocsAPI.Controllers
         }
 
 	    [HttpPut("UpdateUser")]
-	    public async Task<IActionResult> UpdateUser(User user)
+	  
+	    public async Task<IActionResult> UpdateUser([FromBody]User user)
 	    {
             if (ModelState.IsValid == false)
                 return BadRequest("Invalid data");
@@ -112,6 +116,7 @@ namespace DocsAPI.Controllers
                 if (updatedUser == null)
                     return NotFound();
 
+                
                 return Ok(updatedUser);
             }
             catch (Exception ex)

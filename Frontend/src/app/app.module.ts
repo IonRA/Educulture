@@ -28,6 +28,7 @@ import { MatPaginatorModule } from '@angular/material';
 import { UsersService } from './_services/users.service';
 import { AppConfig } from './app.config';
 import { HttpClientModule } from '@angular/common/http';
+import { CourseComponent } from './course/course.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     UsersComponent,
     ArticlesComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CourseComponent
   ],
   imports: [
     BrowserModule,

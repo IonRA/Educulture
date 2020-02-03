@@ -4,5 +4,7 @@
     background-color: $background-color;
     color: $text-color;
     margin-top: $nav-height;
-    min-height: calc(100vh - #{$nav-height})
+    min-height: calc(100vh - #{$nav-height});
+    padding: 15px;
 }
+

@@ -1,23 +1,39 @@
-<mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><fa-icon icon="users"></fa-icon>Users List</mat-card-title>
+    <button mat-raised-button (click)="openDialog()" color="primary">Add new User</button>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+    
   
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
-  
+        <!-- ID Column -->
+        <ng-container *ngFor="let prop of displayedColumns" [matColumnDef]="prop">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{prop}} </th>
+          <td mat-cell *matCellDef="let row"> {{row[prop.toString()]}} </td>
+        </ng-container>
 
-      <!-- ID Column -->
-      <ng-container *ngFor="let prop of displayedColumns" [matColumnDef]="prop">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{prop}} </th>
-        <td mat-cell *matCellDef="let row"> {{row[prop.toString()]}} </td>
-      </ng-container>
+        
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let row"> <button mat-raised-button (click)="openDialog(row['id'])" color="primary">Edit</button> </td>
+        </ng-container>
+  
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsTable"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsTable;">
+        </tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
 
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-      </tr>
-    </table>
-  
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-  </div>
+
   

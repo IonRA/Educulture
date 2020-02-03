@@ -17,7 +17,9 @@ export class NavBarComponent implements OnInit {
   }
 
   openDialog(dialogName: string) {
-    const dialogRef = this.dialog.open(dialogName === "login" ? LogInDialog : SignUpDialog);
+    const dialogRef = this.dialog.open(dialogName === "login" ? LogInDialog : SignUpDialog, {
+      width: '450px'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

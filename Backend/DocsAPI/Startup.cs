@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Services.Docs.Domain.Settings;
 
+
 namespace DocsAPI
 {
     public class Startup
@@ -74,7 +75,7 @@ namespace DocsAPI
                 .AllowCredentials()
                 .Build()));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

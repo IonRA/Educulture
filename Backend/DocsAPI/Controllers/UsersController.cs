@@ -63,7 +63,7 @@ namespace DocsAPI.Controllers
 
 
         [HttpPost("CreateUser")]
-	    public async Task<IActionResult> CreateUser(User user)
+	    public async Task<IActionResult> CreateUser([FromBody]User user)
 	    {
             if (ModelState.IsValid == false)
                 return BadRequest("Invalid data");
@@ -81,7 +81,7 @@ namespace DocsAPI.Controllers
         }
 
 	    [HttpPut("UpdateUser")]
-	    public async Task<IActionResult> UpdateUser(User user)
+	    public async Task<IActionResult> UpdateUser([FromBody]User user)
 	    {
             if (ModelState.IsValid == false)
                 return BadRequest("Invalid data");

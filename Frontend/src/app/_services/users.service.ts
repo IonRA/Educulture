@@ -20,9 +20,10 @@ export class UsersService {
         return this.http.post<User>(this.baseUrl + '/Users/Login', JSON.stringify(user),{ headers: headers })
     }
 
-    register(user: User): Observable<User>{
+    create(user: User): Observable<User>{
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-        return this.http.post<User>(this.baseUrl + '/Users', JSON.stringify(user),{ headers: headers })
+        console.log(user)
+        return this.http.post<User>(this.baseUrl + '/Users/CreateUser', JSON.stringify(user),{ headers: headers })
     }
 
     getAll (): Observable<User[]> {
@@ -33,11 +34,12 @@ export class UsersService {
 
       getById (id: number): Observable<User> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-        return this.http.get<User>(this.baseUrl + '/Users/' + id, { headers: headers })
+        return this.http.get<User>(this.baseUrl + '/Users/GetUserById/' + id, { headers: headers })
     }
 
     update (user: User): Observable<any> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-        return this.http.put<any>(this.baseUrl + '/Users', JSON.stringify(user), { headers: headers })
+        console.log(user)
+        return this.http.put<any>(this.baseUrl + '/Users/UpdateUser', JSON.stringify(user), { headers: headers })
     }
 }

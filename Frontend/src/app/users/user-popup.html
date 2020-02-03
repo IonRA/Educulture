@@ -1,0 +1,17 @@
+<form [formGroup]='userFrom' action="">
+    <h2 mat-dialog-title>{{id > 0 ? "Edit user" : "Create new user"}}</h2>
+    <mat-dialog-content class="mat-typography" fxLayout="column">
+
+        <mat-form-field *ngFor="let prop of displayedColumns">
+            <input matInput [placeholder]="prop" [formControl]="this[prop]" required type="text">
+            <mat-error *ngIf="this[prop].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button [mat-dialog-close]="true" type="submit" [disabled]="userFrom.invalid" (click)="id > 0 ? update() : create()"
+            color="primary">{{id > 0 ? "Update" : "Create"}}</button>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button  cdkFocusInitial>Sign Up</button>
+    </mat-dialog-actions>
+</form>

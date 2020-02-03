@@ -1,5 +1,6 @@
 <mat-grid-list cols="3">
     <mat-grid-tile (click)="goTo('users')">
+      <figure class="mat-figure">
         <mat-card class="example-card">
             <mat-card-header>
                 <mat-card-title>Users</mat-card-title>
@@ -14,10 +15,12 @@
                 </p>
             </mat-card-content>
         </mat-card>
+      </figure>
     </mat-grid-tile>
 
-    
+
     <mat-grid-tile (click)="goTo('courses')">
+      <figure class="mat-figure">
         <mat-card class="example-card">
             <mat-card-header>
                 <mat-card-title>Courses</mat-card-title>
@@ -32,10 +35,12 @@
                 </p>
             </mat-card-content>
         </mat-card>
+      </figure>
     </mat-grid-tile>
 
-    
+
     <mat-grid-tile (click)="goTo('articles')">
+      <figure class="mat-figure">
         <mat-card class="example-card">
             <mat-card-header>
                 <mat-card-title>Articles</mat-card-title>
@@ -50,5 +55,6 @@
                 </p>
             </mat-card-content>
         </mat-card>
+      </figure>
     </mat-grid-tile>
 </mat-grid-list>

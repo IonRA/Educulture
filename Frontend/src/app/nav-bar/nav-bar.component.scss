@@ -1,64 +1,78 @@
 @import "../../config.scss";
 
 .nav-container {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: $nav-height;
-    background: $nav-background-color;
-    color: $nav-text-color;
-    box-shadow: 0 3px 10px 0 rgba(8,19,31,.5);
+  position: fixed;
+  top: 0;
+  text-align:center;
+  width: 100%;
+  height: 8%;
+  background: #373737;
+  color: #c0b283;
+  box-shadow: 15px 15px 70px 0 #DCD0C0;
+
+  .links-container {
+    margin-right: 3%;
+  }
+
+  .mat-button{
+    font-size: 1.5vw;
+  }
 }
 
 .inside-container {
-    height: 100%;
-    margin: 0 10px;
+  height: 100%;
+  margin: 0 10px;
 }
 
 .logo-container {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-size: 30px;
-    color: $logo-color;
-    padding: 0 10px;
-    cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 170px;
+  background-image: linear-gradient(to right, #c0b283 0%, #c0b383 0%, #dcd0c0 100%);
+  font-size: 55px;
+  border-radius: 30%;
+  box-shadow: 0 5px 10px 0 #dcd0c0;
+  color: #373737;
+  padding: 0 10px;
+  cursor: pointer;
 }
 
 .links-container {
-    display: inline-block;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    max-width: calc(100% - 200px);
-    height: 100%;
-    li {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background-attachment: fixed;
-        height: calc(100% - 20px);
-        line-height: 100%;
-        padding: 10px 5px;
-        h2 {
-            margin: 0;
-        }
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  max-width: calc(100% - 200px);
+  height: 100%;
 
-        &:hover {
-            &::before {
-                width: 20px;
-                height: 5px;
-                color: $logo-color;
-            }
-        }
+  li {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-attachment: fixed;
+    height: calc(100% - 20px);
+    line-height: 100%;
+    padding: 10px 5px;
 
-        &:last-child {
-            margin-right: 10px;
-            
-            padding: 10px 15px;
-        }
+    h2 {
+      margin: 0;
     }
+
+    &:hover {
+      &::before {
+        width: 20px;
+        height: 5px;
+        color: $logo-color;
+      }
+    }
+
+    &:last-child {
+      margin-right: 10px;
+
+      padding: 10px 15px;
+    }
+  }
 }

@@ -5,11 +5,13 @@ import { CoursesComponent } from './courses/courses.component';
 import { UsersComponent } from './users/users.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CourseComponent} from './course/course.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'courses', component: CoursesComponent },
+  { path: 'course/:id', component: CourseComponent },
   { path: 'users', component: UsersComponent },
   { path: 'articles', component: ArticlesComponent },
   { path: '', component: HomeComponent, pathMatch: 'full' },

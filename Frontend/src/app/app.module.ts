@@ -20,7 +20,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent, UserDialog } from './users/users.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {MatTableModule} from '@angular/material/table';
@@ -28,17 +28,20 @@ import { MatPaginatorModule } from '@angular/material';
 import { UsersService } from './_services/users.service';
 import { AppConfig } from './app.config';
 import { HttpClientModule } from '@angular/common/http';
+import { CourseComponent } from './course/course.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     LogInDialog,
     SignUpDialog,
+    UserDialog,
     CoursesComponent,
     HomeComponent,
     UsersComponent,
     ArticlesComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CourseComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { HttpClientModule } from '@angular/common/http';
   bootstrap: [AppComponent],
   entryComponents: [
     LogInDialog,
-    SignUpDialog
+    SignUpDialog,
+    UserDialog
   ]
 })
 export class AppModule {

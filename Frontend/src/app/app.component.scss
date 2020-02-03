@@ -1,8 +1,12 @@
 @import "../config.scss";
 
 .main-container {
-    background-color: $background-color;
-    color: $text-color;
-    margin-top: $nav-height;
-    min-height: calc(100vh - #{$nav-height})
+  background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+  background-blend-mode: normal,color-burn;
+  color: $text-color;
+  min-height: calc(100vh - #{$nav-height})
+}
+
+.main-container {
+  height: 100%;
 }

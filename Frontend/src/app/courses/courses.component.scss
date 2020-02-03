@@ -1,0 +1,20 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+mat-grid-list {
+  height: 600px;
+  width: 1200px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 !important;
+
+  .mat-grid-tile {
+    background: lightblue;
+    top: 225px;
+  }
+
+  .course-container {
+    width: 100px;
+    height: 100px;
+    float: left;
+  }
+}

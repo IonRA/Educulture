@@ -21,7 +21,10 @@
         
         <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-          <td mat-cell *matCellDef="let row"> <button mat-raised-button (click)="openDialog(row['id'])" color="primary">Edit</button> </td>
+          <td mat-cell *matCellDef="let row">
+            <button mat-raised-button (click)="openDialog(row['id'])" color="primary">Edit</button>
+            <button mat-raised-button (click)="delete(row['id'])" color="warn" style="margin-left: 15px;">Delete</button>
+          </td>
         </ng-container>
   
     

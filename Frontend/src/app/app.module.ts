@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatSortModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { CoursesComponent } from './courses/courses.component';
+import { CoursesComponent, CourseDialog } from './courses/courses.component';
 import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -28,6 +28,7 @@ import { MatPaginatorModule } from '@angular/material';
 import { UsersService } from './_services/users.service';
 import { AppConfig } from './app.config';
 import { HttpClientModule } from '@angular/common/http';
+import { CoursesService } from './_services/courses.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     LogInDialog,
     SignUpDialog,
     UserDialog,
+    CourseDialog,
     CoursesComponent,
     HomeComponent,
     UsersComponent,
@@ -63,13 +65,15 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     AppConfig,
-    UsersService
+    UsersService,
+    CoursesService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     LogInDialog,
     SignUpDialog,
-    UserDialog
+    UserDialog,
+    CourseDialog
   ]
 })
 export class AppModule {

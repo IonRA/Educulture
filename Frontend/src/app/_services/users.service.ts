@@ -8,38 +8,42 @@ import { User } from '../_models/user.interface';
 
 export class UsersService {
 
-   baseUrl: string;
+    baseUrl: string;
 
-    constructor(private http: HttpClient,@Inject('BASE_URL') baseUrl: string) {
+    constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this.baseUrl = baseUrl;
-        console.log(baseUrl)
     }
 
     login(user: User): Observable<User> {
-        let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-        return this.http.post<User>(this.baseUrl + '/Users/Login', JSON.stringify(user),{ headers: headers })
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.post<User>(this.baseUrl + '/Users/Login', JSON.stringify(user), { headers: headers })
     }
 
-    create(user: User): Observable<User>{
-        let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+    create(user: User): Observable<User> {
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         console.log(user)
-        return this.http.post<User>(this.baseUrl + '/Users/CreateUser', JSON.stringify(user),{ headers: headers })
+        return this.http.post<User>(this.baseUrl + '/Users/CreateUser', JSON.stringify(user), { headers: headers })
     }
 
-    getAll (): Observable<User[]> {
+    getAll(): Observable<User[]> {
         console.log("getall service from: " + this.baseUrl + '/Users/GetAllUsers')
-        let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.get<User[]>(this.baseUrl + '/Users/GetAllUsers', { headers: headers })
-      }
+    }
 
-      getById (id: number): Observable<User> {
-        let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+    getById(id: number): Observable<User> {
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.get<User>(this.baseUrl + '/Users/GetUserById/' + id, { headers: headers })
     }
 
-    update (user: User): Observable<any> {
-        let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+    update(user: User): Observable<any> {
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         console.log(user)
         return this.http.put<any>(this.baseUrl + '/Users/UpdateUser', JSON.stringify(user), { headers: headers })
+    }
+
+    delete(id): Observable<any> {
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.delete<any>(this.baseUrl + '/Users/DeleteUser/' + id, { headers: headers })
     }
 }

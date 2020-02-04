@@ -1,1 +1,43 @@
-<p>courses works!</p>
+<mat-card>
+    <mat-card-header>
+      <mat-card-title><fa-icon icon="torah"></fa-icon>Courses List</mat-card-title>
+      <button mat-raised-button (click)="openDialog()" color="primary">Add new Course</button>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+      
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+      
+    
+          <!-- ID Column -->
+          <ng-container *ngFor="let prop of displayedColumns" [matColumnDef]="prop">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{prop}} </th>
+            <td mat-cell *matCellDef="let row"> {{row[prop.toString()]}} </td>
+          </ng-container>
+  
+          
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+            <td mat-cell *matCellDef="let row"> 
+                <button mat-raised-button (click)="openDialog(row['id'])" color="primary">Edit</button>
+                <button mat-raised-button (click)="delete(row['id'])" color="warn" style="margin-left: 15px;">Delete</button>
+            </td>
+          </ng-container>
+    
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsTable"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsTable;">
+          </tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
+  
+    
+  

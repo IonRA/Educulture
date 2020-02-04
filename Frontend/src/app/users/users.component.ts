@@ -15,7 +15,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 export class UsersComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'username', 'password', 'firstName', 'lastName', 'email', 'adress', 'phone', 'enrolments', 'points', 'roleId'];
-  displayedColumnsTable: string[] = ['id', 'username', 'password', 'firstName', 'lastName', 'email', 'adress', 'phone', 'enrolments', 'points', 'roleId', "Action"];
+  displayedColumnsTable: string[] = [... this.displayedColumns, "Action"];
 
   dataSource: MatTableDataSource<User>;
 
@@ -62,6 +62,15 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  delete(id) {
+    this.userService.delete(id).subscribe((res) => {
+      console.log(res)
+    },
+      error => {
+        console.log(error)
+      });
+  }
+
 }
 
 
@@ -84,7 +93,7 @@ export class UserDialog implements OnInit {
   points = new FormControl('', [Validators.required]);
   roleId = new FormControl('', [Validators.required]);
   
-  userFrom = new FormGroup({
+  form = new FormGroup({
     username: this.username,
     password: this.password,
     firstName: this.firstName,

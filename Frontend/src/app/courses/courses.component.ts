@@ -6,6 +6,7 @@ import { Course } from '../_models/course.interface';
 import { CoursesService } from '../_services/courses.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -25,12 +26,31 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private courseService: CoursesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.getAllCourses()
   }
+
+  courses = [
+    {
+      id: '1',
+      title: 'React-native introduction',
+      url: ''
+    },
+    {
+      id: '2',
+      title: 'Angular8 Advanced',
+      url: ''
+    },
+    {
+      id: '3',
+      title: 'Smecherie',
+      url: ''
+    }
+  ];
 
   getAllCourses() {
     this.courseService.getAll().subscribe((courses: Course[]) => {
@@ -70,6 +90,10 @@ export class CoursesComponent implements OnInit {
       error => {
         console.log(error)
       });
+  }
+
+  goTo(id) {
+    this.router.navigate(['/course/ ' + id]);
   }
 
 }

@@ -99,7 +99,7 @@ namespace DocsAPI.Controllers
             }
         }
 
-	    [HttpDelete("DeleteRank")]
+	    [HttpDelete("DeleteRank/{id}")]
 	    public async Task<IActionResult> DeleteRank(int id)
 	    {
             if (id <= 0)

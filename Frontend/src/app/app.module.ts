@@ -29,6 +29,7 @@ import { UsersService } from './_services/users.service';
 import { AppConfig } from './app.config';
 import { HttpClientModule } from '@angular/common/http';
 import { CoursesService } from './_services/courses.service';
+import { CourseComponent } from './course/course.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { CoursesService } from './_services/courses.service';
     HomeComponent,
     UsersComponent,
     ArticlesComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CourseComponent
   ],
   imports: [
     BrowserModule,

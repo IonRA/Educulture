@@ -61,18 +61,39 @@ namespace DocsAPI.Controllers
 		    }
 	    }
 
+	    [HttpPost("Login")]
+	    public async Task<IActionResult> Login([FromBody]User user)
+	    {
+		    
+		    try
+		    {
+			    var _user = await _userManager.GetAsync(x => x.Username == user.Username && x.Password == user.Password);
+
+			    if (_user == null)
+				    return NotFound();
+
+			    return Ok(_user);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);  
+		    }
+	    }
+
 
         [HttpPost("CreateUser")]
-	    public async Task<IActionResult> CreateUser([FromBody]User user)
+        public async Task<IActionResult> CreateUser([FromBody]User user)
 	    {
             if (ModelState.IsValid == false)
                 return BadRequest("Invalid data");
 
             try
             {
-                await _userManager.CreateAsync(user);
+                
+                var _user = await _userManager.CreateAsync(user);
 
-                return Ok();
+                
+                return Ok(_user);
             }
             catch (Exception ex)
             {
@@ -81,6 +102,7 @@ namespace DocsAPI.Controllers
         }
 
 	    [HttpPut("UpdateUser")]
+	  
 	    public async Task<IActionResult> UpdateUser([FromBody]User user)
 	    {
             if (ModelState.IsValid == false)
@@ -93,7 +115,8 @@ namespace DocsAPI.Controllers
                 if (updatedUser == null)
                     return NotFound();
 
-                return Ok();
+                
+                return Ok(updatedUser);
             }
             catch (Exception ex)
             {
@@ -101,7 +124,7 @@ namespace DocsAPI.Controllers
             }
         }
 
-	    [HttpDelete("DeleteUser")]
+	    [HttpDelete("DeleteUser/{id}")]
 	    public async Task<IActionResult> DeleteUser(int id)
 	    {
             if (id <= 0)

@@ -8,6 +8,11 @@ namespace Docs.Domain.Models
 	{
 		public int UserID { get; set; }
 		public int CourseID { get; set; }
-		public DateTime CreatedOn { get; set; }
+
+		public DateTime CreatedOn
+		{
+			get => CreatedOn;
+			set => CreatedOn = DateTime.Now;
+		}
 	}
 }

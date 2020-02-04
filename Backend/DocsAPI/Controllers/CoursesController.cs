@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Docs.Domain.Interfaces.IManagers;
+using Docs.Domain.Interfaces.IRepositories;
 using Docs.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,13 @@ namespace DocsAPI.Controllers
     [ApiController]
     public class CoursesController : ControllerBase
     {
-	    private ICourseManager _courseManager;
+	    private readonly ICourseManager _courseManager;
+	    private readonly ICourseRepository _courseRepository;
 
-	    public CoursesController(ICourseManager courseManager)
+	    public CoursesController(ICourseManager courseManager, ICourseRepository courseRepository)
 	    {
 		    _courseManager = courseManager;
+		    _courseRepository = courseRepository;
 	    }
 
 	    [HttpGet("GetAllCourses")]
@@ -61,7 +64,76 @@ namespace DocsAPI.Controllers
 		    }
 	    }
 
-        [HttpPost("CreateCourse")]
+	    [HttpGet("GetCoursesWhereUserEnrolled/{id}")]
+	    public async Task<IActionResult> GetCoursesWhereUserEnrolled(int id)
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+
+		    try
+		    {
+			    var courses = await _courseRepository.GetCoursesWhereUserEnrolled(id);
+
+			    if (courses == null)
+				    return NotFound();
+
+			    return Ok(courses);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+	    [HttpGet("GetCoursesWhereUserNotEnrolled/{id}")]
+	    public async Task<IActionResult> GetCoursesWhereUserNotEnrolled(int id)
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+
+		    try
+		    {
+			    var courses = await _courseRepository.GetCoursesWhereUserNotEnrolled(id);
+
+			    if (courses == null)
+				    return NotFound();
+
+			    return Ok(courses);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+	    [HttpGet("GetCoursesCreatedByUser/{id}")]
+	    public async Task<IActionResult> GetCoursesCreatedByUser(int id)
+	    {
+		    if (id <= 0)
+		    {
+			    return BadRequest("The given Id is not valid. Id must be greater than 0");
+		    }
+
+		    try
+		    {
+			    var courses = await _courseRepository.GetCoursesCreatedByUser(id);
+
+			    if (courses == null)
+				    return NotFound();
+
+			    return Ok(courses);
+		    }
+		    catch (Exception ex)
+		    {
+			    return StatusCode(500, ex.Message);
+		    }
+	    }
+
+		[HttpPost("CreateCourse")]
 	    public async Task<IActionResult> CreateCourse(Course course)
 	    {
             if (ModelState.IsValid == false)

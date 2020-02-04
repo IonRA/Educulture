@@ -13,7 +13,7 @@ namespace Docs.Infrastructure.Repositories
 {
 	public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
 	{
-		private readonly UserDbContext _db;
+		protected readonly UserDbContext _db;
 
 		public BaseRepository(UserDbContext db)
 		{

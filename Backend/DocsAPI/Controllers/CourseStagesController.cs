@@ -61,6 +61,29 @@ namespace DocsAPI.Controllers
             }
         }
 
+        [HttpGet("GetCourseStagesByCourseId/{id}")]
+        public async Task<IActionResult> GetCourseStagesByCourseId(int id)
+        {
+	        if (id <= 0)
+	        {
+		        return BadRequest("The given Id is not valid. Id must be greater than 0");
+	        }
+
+	        try
+	        {
+		        var answer = await _courseStageManager.GetAsync(x => x.CourseId == id);
+
+		        if (answer == null)
+			        return NotFound();
+
+		        return Ok(answer);
+	        }
+	        catch (Exception ex)
+	        {
+		        return StatusCode(500, ex.Message);
+	        }
+        }
+
         [HttpPost("CreateCourseStage")]
         public async Task<IActionResult> CreateCourseStage(CourseStage courseStage)
         {

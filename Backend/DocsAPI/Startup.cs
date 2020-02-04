@@ -46,8 +46,8 @@ namespace DocsAPI
 			});
 
 			services.AddScoped<IAnswerManager, AnswerManager>();
-			services.AddScoped<IAuthorManager, AuthorManager>();
 			services.AddScoped<ICourseManager, CourseManager>();
+			services.AddScoped<ICourseStageManager, CourseStageManager>();
 			services.AddScoped<IEnrollmentManager, EnrollmentManager>();
 			services.AddScoped<IQuestionManager, QuestionManager>();
 			services.AddScoped<IRankManager, RankManager>();
@@ -55,8 +55,8 @@ namespace DocsAPI
 			services.AddScoped<IUserManager, UserManager>();
 
             services.AddScoped<IAnswerRepository, AnswerRepository>();
-            services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<ICourseStageRepository, CourseStageRepository>();
             services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IRankRepository, RankRepository>();

@@ -34,28 +34,9 @@ namespace Docs.MetadataDbContext.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("QuestionId");
+
                     b.ToTable("Answers");
-                });
-
-            modelBuilder.Entity("Docs.Domain.Models.Author", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("Docs.Domain.Models.Course", b =>
@@ -64,9 +45,6 @@ namespace Docs.MetadataDbContext.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AuthorId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
@@ -77,11 +55,37 @@ namespace Docs.MetadataDbContext.Migrations
                     b.Property<string>("Tags")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("Docs.Domain.Models.CourseStage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("CourseStages");
                 });
 
             modelBuilder.Entity("Docs.Domain.Models.Enrollment", b =>
@@ -102,11 +106,9 @@ namespace Docs.MetadataDbContext.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseID");
-
                     b.HasIndex("UserID");
 
-                    b.ToTable("Enrolments");
+                    b.ToTable("Enrollments");
                 });
 
             modelBuilder.Entity("Docs.Domain.Models.Question", b =>
@@ -123,6 +125,8 @@ namespace Docs.MetadataDbContext.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Questions");
                 });
@@ -199,24 +203,47 @@ namespace Docs.MetadataDbContext.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Docs.Domain.Models.Answer", b =>
+                {
+                    b.HasOne("Docs.Domain.Models.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Docs.Domain.Models.Course", b =>
                 {
-                    b.HasOne("Docs.Domain.Models.Author", "Author")
-                        .WithMany("Courses")
-                        .HasForeignKey("AuthorId");
+                    b.HasOne("Docs.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Docs.Domain.Models.CourseStage", b =>
+                {
+                    b.HasOne("Docs.Domain.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Docs.Domain.Models.Enrollment", b =>
                 {
-                    b.HasOne("Docs.Domain.Models.Course", null)
-                        .WithMany("Enrolments")
-                        .HasForeignKey("CourseID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Docs.Domain.Models.User", null)
                         .WithMany("Enrolments")
                         .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Docs.Domain.Models.Question", b =>
+                {
+                    b.HasOne("Docs.Domain.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

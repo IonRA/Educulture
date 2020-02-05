@@ -53,5 +53,13 @@ namespace Docs.Infrastructure.Managers
             return entities;
         }
 
+        public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            var entities = await _repo.GetAllByConditionAsync(expression);
+
+            return entities;
+        }
+
+
     }
 }

@@ -1,8 +1,59 @@
-<div class="container">
-  <div class="card">
-    <h2>Course # {{id}}</h2>
-    <h5>Title description, Dec 7, 2017</h5>
-    <div class="fakeimg" style="height:200px;">Image</div>
-    <p>Some text..</p>
-  </div>
-</div>
+<mat-card *ngIf="course">
+  <mat-card-header>
+    <mat-card-title>
+      <fa-icon icon="torah"></fa-icon>{{course.name}}
+    </mat-card-title>
+    <button mat-raised-button *ngIf="currentUser.id != course.userId" (click)="enroll()" color="primary">Enroll</button>
+  </mat-card-header>
+  <mat-card-content>
+    <p><span class="short-desc" >Short Description:</span> {{course.name}}</p>
+
+    <!-- <div>
+      <div *ngFor="let stage of Stages">
+
+      </div>
+    </div> -->
+
+    <h4 *ngIf="numberOfStages > 0">Stages:</h4>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel *ngFor="let stage of courseStages; let i = index" [expanded]="step === i"
+        (opened)="setStep(i)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{stage.name}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Stage number: {{i}}
+            <mat-icon>folder</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        {{stage.text}}
+
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Previous</button>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+    <br><br>
+
+    <h4 *ngIf="currentUser.id == course.userId">Create new Stage:</h4>
+    <form *ngIf="currentUser.id == course.userId" [formGroup]='form' action="">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name of stage" [formControl]="stageName" required type="text">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Content of stage" [formControl]="stageText" required type="text"></textarea>
+      </mat-form-field>
+
+      <div align="end">
+        <button mat-button color="warn" (click)="createStage()" [disabled]="form.invalid">Create</button>
+      </div>
+    </form>
+    
+  </mat-card-content>
+</mat-card>

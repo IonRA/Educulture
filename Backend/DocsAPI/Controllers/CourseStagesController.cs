@@ -71,7 +71,7 @@ namespace DocsAPI.Controllers
 
 	        try
 	        {
-		        var answer = await _courseStageManager.GetAsync(x => x.CourseId == id);
+		        var answer = await _courseStageManager.GetAllAsync(x => x.CourseId == id);
 
 		        if (answer == null)
 			        return NotFound();

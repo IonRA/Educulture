@@ -38,7 +38,7 @@ namespace Docs.Infrastructure.Repositories
 			var courseIds = await _db.Set<Enrollment>().Where(enrollment => enrollment.UserID == userId)
 				.Select(course => course.CourseID).ToListAsync();
 
-			var allCourses = await _db.Set<Course>().Include("User").Where(course => !courseIds.Contains(course.Id)).ToListAsync();
+			var allCourses = await _db.Set<Course>().Include("User").Where(course => !courseIds.Contains(course.Id) && course.UserId != userId).ToListAsync();
 
 			return allCourses;
 		}

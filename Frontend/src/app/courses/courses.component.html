@@ -1,51 +1,131 @@
-<mat-card>
-    <mat-card-header>
-      <mat-card-title><fa-icon icon="torah"></fa-icon>Courses List</mat-card-title>
-      <button mat-raised-button (click)="openDialog()" color="primary">Add new Course</button>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-      </mat-form-field>
-      
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
-      
-    
-          <!-- ID Column -->
-          <ng-container *ngFor="let prop of displayedColumns" [matColumnDef]="prop">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{prop}} </th>
-            <td mat-cell *matCellDef="let row"> {{row[prop.toString()]}} </td>
-          </ng-container>
-  
-          
-          <ng-container matColumnDef="Action">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-            <td mat-cell *matCellDef="let row"> 
-                <button mat-raised-button (click)="openDialog(row['id'])" color="primary">Edit</button>
-                <button mat-raised-button (click)="delete(row['id'])" color="warn" style="margin-left: 15px;">Delete</button>
-            </td>
-          </ng-container>
-    
-          
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsTable"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumnsTable;">
-          </tr>
-        </table>
-      
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-      </div>
-    </mat-card-content>
-  </mat-card>
-  
-  
-    
-  
-<mat-grid-list cols="2" rowHeight="2:1" gutterSize="20px">
-  <div class="course-container " *ngFor="let course of courses">
-  <mat-grid-tile (click)="goTo(course.id)" >
-    {{course.title}}
-  </mat-grid-tile>
-  </div>
+<mat-card *ngIf="currentUser.roleId == 1">
+  <mat-card-header>
+    <mat-card-title>
+      <fa-icon icon="torah"></fa-icon>Courses List
+    </mat-card-title>
+    <button mat-raised-button (click)="openDialog()" color="primary">Add new Course</button>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
 
-</mat-grid-list>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+
+        <!-- ID Column -->
+        <ng-container *ngFor="let prop of displayedColumns" [matColumnDef]="prop">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{prop}} </th>
+          <td mat-cell *matCellDef="let row"> {{row[prop.toString()]}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-raised-button (click)="openDialog(row['id'])" color="primary">Edit</button>
+            <button mat-raised-button (click)="delete(row['id'])" color="warn"
+              style="margin-left: 15px;">Delete</button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsTable"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsTable;">
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+<div *ngIf="currentUser.roleId == 2">
+  <h1>Coursed created by You</h1>
+  <mat-grid-list cols="4" gutterSize="20px">
+    <div class="course-container" *ngFor="let course of createdByUserCourses">
+      <mat-grid-tile>
+        <mat-card class="example-card corse-card">
+          <mat-card-header (click)="goTo(course.id)" style="cursor: pointer;">
+            <mat-card-title>
+              <fa-icon icon="torah"></fa-icon>{{course.name}}
+            </mat-card-title>
+            <mat-card-subtitle>{{course.tags}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              <span class="short-desc" >Short Description:</span> {{course.details}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-button (click)="goTo(course.id)">Read or modify</button>
+            <button mat-raised-button (click)="delete(course.id)" color="warn">Delete</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </div>
+
+    <div class="course-container">
+      <mat-grid-tile>
+        <h1 class="add-button" (click)="openDialog()">+</h1>
+      </mat-grid-tile>
+    </div>
+
+  </mat-grid-list>
+  
+</div>
+
+<div *ngIf="currentUser.roleId == 2">
+  <h1>Enroled Courses</h1>
+  <mat-grid-list *ngIf="currentUser.roleId == 2" cols="4" gutterSize="20px">
+    <div class="course-container " *ngFor="let course of enrolledCourses">
+      <mat-grid-tile>
+        <mat-card class="example-card corse-card">
+          <mat-card-header (click)="goTo(course.id)" style="cursor: pointer;">
+            <mat-card-title>
+              <fa-icon icon="torah"></fa-icon>{{course.name}}
+            </mat-card-title>
+            <mat-card-subtitle>By {{course.user.firstName + ' ' +  course.user.lastName}} - <span class="tags" >{{course.tags}}</span> </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              <span class="short-desc" >Short Description:</span> {{course.details}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-button (click)="goTo(course.id)">Read</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </div>
+  </mat-grid-list>
+</div>
+
+<div *ngIf="currentUser.roleId == 2">
+  <h1>You might want to read</h1>
+  <mat-grid-list *ngIf="currentUser.roleId == 2" cols="4" gutterSize="20px">
+    <div class="course-container " *ngFor="let course of notEnrolledCourses">
+      <mat-grid-tile>
+        <mat-card class="example-card corse-card">
+          <mat-card-header (click)="goTo(course.id)" style="cursor: pointer;">
+            <mat-card-title>
+              <fa-icon icon="torah"></fa-icon>{{course.name}}
+            </mat-card-title>
+            <mat-card-subtitle>By {{course.user.firstName + ' ' +  course.user.lastName}} - <span class="tags" >{{course.tags}}</span> </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              <span class="short-desc" >Short Description:</span> {{course.details}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-button (click)="goTo(course.id)">Read</button>
+            <button mat-button (click)="enroll(course.id)">Enroll</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </div>
+  </mat-grid-list>
+</div>

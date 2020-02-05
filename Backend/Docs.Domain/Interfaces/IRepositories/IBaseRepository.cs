@@ -9,6 +9,7 @@ namespace Docs.Domain.Interfaces.IRepositories
     public interface IBaseRepository<TEntity>
     {
         Task<List<TEntity>> GetAllAsync();
+        Task<List<TEntity>> GetAllByConditionAsync(Expression<Func<TEntity, bool>> expression);
 
         Task<TEntity> GetOneByConditionAsync(Expression<Func<TEntity, bool>> expression);
 

@@ -17,5 +17,6 @@ namespace Docs.Domain.Interfaces.IManagers
         Task DeleteAsync(int id);
 
         Task<List<TEntity>> GetAllAsync();
+        Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression);
     }
 }

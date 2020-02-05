@@ -1,20 +1,25 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-mat-grid-list {
-  height: 600px;
-  width: 1200px;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 !important;
+.corse-card {
+  padding: 16px 25px !important;
+  width: 100%;
 
-  .mat-grid-tile {
-    background: lightblue;
-    top: 225px;
+  mat-card-header {
+    padding: 0;
   }
+}
 
-  .course-container {
-    width: 100px;
-    height: 100px;
-    float: left;
-  }
+.add-button {
+  width: 50px;
+  text-align: center;
+  border: 4px solid;
+  cursor: pointer
+}
+
+.tags {
+  color: green !important;
+}
+
+.short-desc {
+  color: gray !important;
 }

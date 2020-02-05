@@ -62,12 +62,12 @@ namespace DocsAPI.Controllers
 	    }
 
 	    [HttpPost("Login")]
-	    public async Task<IActionResult> Login([FromBody]User user)
+	    public async Task<IActionResult> Login([FromQuery]string  username, [FromQuery]string password)
 	    {
 		    
 		    try
 		    {
-			    var _user = await _userManager.GetAsync(x => x.Username == user.Username && x.Password == user.Password);
+			    var _user = await _userManager.GetAsync(x => x.Username == username && x.Password == password);
 
 			    if (_user == null)
 				    return NotFound();

@@ -43,6 +43,11 @@ namespace Docs.Infrastructure.Repositories
 			return await _db.Set<TEntity>().ToListAsync();
 		}
 
+		public async Task<List<TEntity>> GetAllByConditionAsync(Expression<Func<TEntity, bool>> expression)
+		{
+			return await _db.Set<TEntity>().Where(expression).ToListAsync();
+		}
+
 		public async Task<TEntity> GetOneByConditionAsync(Expression<Func<TEntity, bool>> expression)
 		{
 			return await _db.Set<TEntity>().FirstOrDefaultAsync(expression);

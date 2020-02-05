@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-html, body { height: 100%; }
 
 table {
     width: 100%;
@@ -14,6 +13,8 @@ table {
 
 mat-card {
     padding: 0 !important;
+    box-shadow: 0 2px 1px -1px rgba(66, 66, 66, 0.2), 0 1px 1px 0 rgba(60, 60, 60, 0.14), 0 1px 3px 0 rgba(97, 97, 97, 0.12);
+    
     mat-card-header {
         position: relative;
         padding: 16px 0;

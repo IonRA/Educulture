@@ -14,9 +14,9 @@ export class UsersService {
         this.baseUrl = baseUrl;
     }
 
-    login(user: User): Observable<User> {
+    login(username, password): Observable<User> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.post<User>(this.baseUrl + '/Users/Login', JSON.stringify(user), { headers: headers })
+        return this.http.post<User>(this.baseUrl + '/Users/Login?username=' + username + '&password=' + password, { headers: headers })
     }
 
     create(user: User): Observable<User> {

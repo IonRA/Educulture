@@ -31,6 +31,21 @@ export class CoursesService {
         return this.http.get<Course>(this.baseUrl + '/Courses/GetCourseById/' + id, { headers: headers })
     }
 
+    getAllCreatedByUserId(id: number): Observable<Course[]> {
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.get<Course[]>(this.baseUrl + '/Courses/GetCoursesCreatedByUser/' + id, { headers: headers })
+    }
+
+    getAllEnrolledByUserId(id: number): Observable<Course[]> {
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.get<Course[]>(this.baseUrl + '/Courses/GetCoursesWhereUserEnrolled/' + id, { headers: headers })
+    }
+
+    getAllNotEnrolledByUserId(id: number): Observable<Course[]> {
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.get<Course[]>(this.baseUrl + '/Courses/GetCoursesWhereUserNotEnrolled/' + id, { headers: headers })
+    }
+    
     update(course: Course): Observable<any> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         console.log(course)

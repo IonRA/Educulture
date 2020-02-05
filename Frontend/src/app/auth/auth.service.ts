@@ -18,8 +18,11 @@ export class AuthService {
   public isAdmin(): boolean {
 
     const currentUser = JSON.parse(localStorage.getItem('user'));
-    console.log(currentUser == null && currentUser.roleId != 1)
-    if(currentUser == null || currentUser.roleId != 1) {
+    
+    if(currentUser == null){
+      this.notificationService.openSnackBar('You are not logged in')
+      return false
+    } else if (currentUser.roleId != 1){
       this.notificationService.openSnackBar('You are not admin')
       return false
     } 

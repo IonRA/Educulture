@@ -123,6 +123,7 @@ export class CoursesComponent implements OnInit {
             console.log(error)
           });
       } else if (res.method == "update") {
+        res.course.userId = this.currentUser.id;
         this.courseService.update(res.course).subscribe((res) => {
           this.getAllCourses();
           this.notificationService.openSnackBar('Succesful Update')

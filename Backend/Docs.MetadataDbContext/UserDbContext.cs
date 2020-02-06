@@ -35,55 +35,50 @@ namespace Docs.MetadataDbContext
 		public DbSet<CourseStage> CourseStages { get; set; }
 
 
-		//protected override void OnModelCreating(ModelBuilder modelBuilder)
-		//{
-		//	modelBuilder.Entity<User>().HasData(
-		//		new User { },
-		//		new User { },
-		//		new User { },
-		//		new User { });
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			//modelBuilder.Entity<User>().HasData(
+			//	new User { },
+			//	new User { },
+			//	new User { },
+			//	new User { });
 
-		//	modelBuilder.Entity<Answer>().HasData(
-		//		new Answer { },
-		//		new Answer { },
-		//		new Answer { },
-		//		new Answer { });
+			//modelBuilder.Entity<Answer>().HasData(
+			//	new Answer { },
+			//	new Answer { },
+			//	new Answer { },
+			//	new Answer { });
 
-		//	modelBuilder.Entity<Author>().HasData(
-		//		new Author { },
-		//		new Author { },
-		//		new Author { },
-		//		new Author { });
+			modelBuilder.Entity<Role>().HasData(
+				new Role
+				{
+					Id = 1,
+					Name = "Admin"
+				});
 
-		//	modelBuilder.Entity<Role>().HasData(
-		//		new Role { },
-		//		new Role { },
-		//		new Role { },
-		//		new Role { });
+			//modelBuilder.Entity<Rank>().HasData(
+			//	new Rank { },
+			//	new Rank { },
+			//	new Rank { },
+			//	new Rank { });
 
-		//	modelBuilder.Entity<Rank>().HasData(
-		//		new Rank { },
-		//		new Rank { },
-		//		new Rank { },
-		//		new Rank { });
+			//modelBuilder.Entity<Course>().HasData(
+			//	new Course { },
+			//	new Course { },
+			//	new Course { },
+			//	new Course { });
 
-		//	modelBuilder.Entity<Course>().HasData(
-		//		new Course { },
-		//		new Course { },
-		//		new Course { },
-		//		new Course { });
+			//modelBuilder.Entity<Question>().HasData(
+			//	new Question { },
+			//	new Question { },
+			//	new Question { },
+			//	new Question { });
 
-		//	modelBuilder.Entity<Question>().HasData(
-		//		new Question { },
-		//		new Question { },
-		//		new Question { },
-		//		new Question { });
-
-		//	modelBuilder.Entity<Enrollment>().HasData(
-		//		new Enrollment { },
-		//		new Enrollment { },
-		//		new Enrollment { },
-		//		new Enrollment { });
-		//}
+			//modelBuilder.Entity<Enrollment>().HasData(
+			//	new Enrollment { },
+			//	new Enrollment { },
+			//	new Enrollment { },
+			//	new Enrollment { });
+		}
 	}
 }

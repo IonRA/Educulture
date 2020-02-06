@@ -56,7 +56,7 @@
           </mat-card-header>
           <mat-card-content>
             <p>
-              <span class="short-desc" >Short Description:</span> {{course.details}}
+              <span class="short-desc">Short Description:</span> {{course.details}}
             </p>
           </mat-card-content>
           <mat-card-actions align="end">
@@ -74,10 +74,9 @@
     </div>
 
   </mat-grid-list>
-  
 </div>
 
-<div *ngIf="currentUser.roleId == 2">
+<div *ngIf="currentUser.roleId == 2 && enrolledCourses && enrolledCourses.length > 0">
   <h1>Enroled Courses</h1>
   <mat-grid-list *ngIf="currentUser.roleId == 2" cols="4" gutterSize="20px">
     <div class="course-container " *ngFor="let course of enrolledCourses">
@@ -87,11 +86,12 @@
             <mat-card-title>
               <fa-icon icon="torah"></fa-icon>{{course.name}}
             </mat-card-title>
-            <mat-card-subtitle>By {{course.user.firstName + ' ' +  course.user.lastName}} - <span class="tags" >{{course.tags}}</span> </mat-card-subtitle>
+            <mat-card-subtitle>By {{course.user.firstName + ' ' +  course.user.lastName}} - <span
+                class="tags">{{course.tags}}</span> </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <p>
-              <span class="short-desc" >Short Description:</span> {{course.details}}
+              <span class="short-desc">Short Description:</span> {{course.details}}
             </p>
           </mat-card-content>
           <mat-card-actions align="end">
@@ -103,7 +103,7 @@
   </mat-grid-list>
 </div>
 
-<div *ngIf="currentUser.roleId == 2">
+<div *ngIf="currentUser.roleId == 2 && notEnrolledCourses && notEnrolledCourses.length > 0">
   <h1>You might want to read</h1>
   <mat-grid-list *ngIf="currentUser.roleId == 2" cols="4" gutterSize="20px">
     <div class="course-container " *ngFor="let course of notEnrolledCourses">
@@ -113,11 +113,12 @@
             <mat-card-title>
               <fa-icon icon="torah"></fa-icon>{{course.name}}
             </mat-card-title>
-            <mat-card-subtitle>By {{course.user.firstName + ' ' +  course.user.lastName}} - <span class="tags" >{{course.tags}}</span> </mat-card-subtitle>
+            <mat-card-subtitle>By {{course.user.firstName + ' ' +  course.user.lastName}} - <span
+                class="tags">{{course.tags}}</span> </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <p>
-              <span class="short-desc" >Short Description:</span> {{course.details}}
+              <span class="short-desc">Short Description:</span> {{course.details}}
             </p>
           </mat-card-content>
           <mat-card-actions align="end">

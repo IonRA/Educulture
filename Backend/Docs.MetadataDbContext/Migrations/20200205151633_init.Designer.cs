@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Docs.MetadataDbContext.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20200205072535_init")]
+    [Migration("20200205151633_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,6 +164,13 @@ namespace Docs.MetadataDbContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Docs.Domain.Models.User", b =>

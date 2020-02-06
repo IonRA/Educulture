@@ -162,6 +162,13 @@ namespace Docs.MetadataDbContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Docs.Domain.Models.User", b =>
